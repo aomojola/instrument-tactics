@@ -11,7 +11,7 @@ Why this demo exists:
 
 If you're a neobank or card issuer trying to drive adoption of your card, this should help. Imagine you
 
-Issue a virtual card
-Give your cardholder a button to add the card to their browser
-User clicks the button, the virtual card is now saved in chrome/safari
-(Days later) User is shopping on target.com, browser offers cash card as an autofill
+1. Issue a virtual card
+2. Give your cardholder a button to add the card to their browser
+3. User clicks the button, the virtual card is now saved in chrome/safari
+4. (Days later) User is shopping on target.com, browser offers cash card as an autofill
