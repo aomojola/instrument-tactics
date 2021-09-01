@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+    function parseURL(url)
+{
+    var a =  document.createElement('a');
+    a.href = url;
+    return {
+        source: url,
+        protocol: a.protocol.replace(':',''),
+        host: a.hostname,
+        port: a.port,
+        query: a.search,
+        params: (function(){
+            //seg = a.search.replace(/^?/,'').split('&'),
+            var ret = {};
+            var src = jQuery.trim(a.search);
+            if(src && src.indexOf('?') === 0) src = src.substr(1);
+            var seg = src.split('&');
+            var len = seg.length, i = 0, s;
+            for (;i<len;i++) {
+                if (!seg[i]) { continue; }
+                s = seg[i].split('=');
+                ret[s[0]] = s[1];
+            }
+            return ret;
+        })(),
+        hash: a.hash.replace('#',''),
+        path: a.pathname.replace(/^([^\/])/,'/$1'),
+        relative: (a.href.match(/tps?:\/\/[^\/]+(.+)/) || [,''])[1],
+        segments: a.pathname.replace(/^\//,'').split('/'),
+        file: (a.pathname.match(/\/([^\/?#]+)$/i) || [,''])[1],
+    };
+};
+var pageurl = parseURL(document.location.href);
+console.log(pageurl)
+jQuery(function(){
+   // jQuery("#creditCard").val(pageurl.params.creditCard);
+    // jQuery("#cvv").val(pageurl.params.cvv);
+    
+    var components = pageurl.hash.split("/");
+    var field = 0, name, fields = ['creditCard','cvv','mnth','exp-year'];
+    while(field < components.length){
+        if(fields.indexOf(components[field]) >= 0){
+            name = components[field];
+            ++field;
+            if(field < components.length){
+                jQuery("#"+name).val(components[field]);
+            }
+        }
+        ++field;
+    }
+
+});
+</script>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+ 
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <!-- <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css"> -->
+  
+  <link rel="stylesheet" type="text/css" href="css/stylesheet.css" charset="utf-8">
+  <style type="text/css">
+					body{
+				font-family: 'proximanova-regular';
+							}
+		</style>
+
+
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="https://www.kunle.app/images/fav.png">
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+      <form id="loginForm" action="/whatever" method="post">
+  <div class="row">
+    <div class="four columns">
+<p> <a href="index.html">Home</a> </p>
+<p> <a href="september-2021-card-tactics.html">Back to essay</a> </p>
+
+    </div>
+    <div class="four columns" style="border-radius: 4px; border: 1px solid #bbb; padding: 15px; margin-top:10px;">
+    <label for="firstName"> Enter Your First Name</label>
+<input style="width:100%;" name="firstName" title="First name" autocomplete="section-payment given-name" type="text" maxlength="30" validationtype="firstname" errorlabel="Please enter your first name as shown on your card." id="firstName" value="James">    
+<label for="lastName">Enter your last name</label>
+<input style="width:100%;" name="lastName" title="Last name" type="text" autocomplete="section-payment family-name" maxlength="30" validationtype="lastname" errorlabel="Please enter your last name as shown on your card." id="lastName" value="Bond">
+        
+      <label for="creditCard">Enter 16 digit Credit Card Number</label>
+      <input style="width:100%;" type="text" pattern="[0-9]*" inputmode="numeric"  name="creditCard" autocomplete="section-payment cc-number" maxlength="16"  errorlabel="Please enter a valid credit card number."  id="creditCard" value=""  required/>
+      
+      <label for="month-chooser">Enter Expiration Month</label>
+          <select name="month-chooser" autocomplete="section-payment cc-exp-month" id="mnth" style="width:100%;">
+<option value="">07</option>
+<option  value="01">01</option>
+<option  value="02">02</option>
+<option value="03">03</option>
+<option  value="04">04</option>
+<option  value="05">05</option>
+<option  value="07">07</option>
+<option  value="08">08</option>
+<option  value="09">09</option>
+<option  value="10">10</option>
+<option  value="11">11</option>
+<option  value="12">12</option>
+</select>
+      
+      <label for="year-chooser">Enter Expiration Year</label>
+      <select name="year-chooser" autocomplete="section-payment cc-exp-year" id="exp-year" style="width:100%;">
+<option  value="">41</option>
+<option  value="2021">21</option>
+<option  value="2022">22</option>
+<option  value="2023">23</option>
+<option  value="2025">25</option>
+<option  value="2026">26</option>
+<option  value="2027">27</option>
+<option  value="2028">28</option>
+<option  value="2029">29</option>
+<option  value="2030">30</option>
+<option  value="2031">31</option>
+<option  value="2032">32</option>
+<option  value="2033">33</option>
+<option  value="2034">34</option>
+<option  value="2035">35</option>
+<option  value="2036">36</option>
+<option  value="2037">37</option>
+<option  value="2038">38</option>
+<option  value="2039">39</option>
+<option  value="2040">40</option>
+<option  value="2041">41</option>
+</select>
+<label for="cvv">Enter CVV</label>
+<input style="width:100%;" aria-invalid="false" placeholder=" " type="password" name="cvv" title="cvv" autocomplete="section-payment cc-csc" maxlength="3" pattern="[0-9]*" inputmode="numeric" 
+validationparams="3" id="cvv" value="123">
+
+
+
+      <button type="submit" class="button-primary" style="width:100%"  target=”_blank” >Add Card to Browser</button>
+    </div>
+</form>
+
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
